@@ -1,0 +1,27 @@
+{
+  "name": "helsinki_fullstack_2022_part3",
+  "version": "1.0.0",
+  "description": "part3 of open course University of Helsinki",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gentilmente/helsinki_fullstack_2022_part3.git"
+  },
+  "author": "gentilmente",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gentilmente/helsinki_fullstack_2022_part3/issues"
+  },
+  "homepage": "https://github.com/gentilmente/helsinki_fullstack_2022_part3#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
