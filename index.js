@@ -35,10 +35,12 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
-/*
 const generateId = () => {
-  const maxId = persons.length > 0 ? Math.max(...persons.map((n) => n.id)) : 0;
-  return maxId + 1;
+  min = Math.ceil(0);
+  max = Math.floor(9999999);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+  /*     const maxId = persons.length > 0 ? Math.max(...persons.map((n) => n.id)) : 0;
+    return maxId + 1; */
 };
 
 app.post("/api/persons", (request, response) => {
@@ -60,6 +62,7 @@ app.post("/api/persons", (request, response) => {
 
   response.json(person);
 });
+/*
  */
 
 const PORT = 3001;
