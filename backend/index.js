@@ -63,7 +63,6 @@ app.post("/api/persons", (request, response, next) => {
   });
 
   person
-    .exists()
     .save()
     .then((savedPerson) => {
       response.json(savedPerson);
