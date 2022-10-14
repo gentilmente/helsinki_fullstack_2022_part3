@@ -1,7 +1,5 @@
 import axios from "axios";
-//const baseUrl = "http://localhost:3001/persons";
 const baseUrl = "/api/persons";
-//const baseUrl = "phonebookhelsinki.fly.dev/api/persons";
 
 const getAll = () =>
   axios
