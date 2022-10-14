@@ -1,3 +1,5 @@
+require("dotenv").config();
+const Person = require("./models/person");
 const cors = require("cors");
 const express = require("express");
 const app = express();
@@ -28,11 +30,10 @@ app.use(
   })
 ); */
 
-app.use(express.json());
-let persons = require("./data.json");
+//let persons = require("./data.json");
 
 app.get("/", (request, response) => {
-  response.send("<h1>Hello Helsinko!</h1>");
+  response.send("<h1>Hello Phonebook!</h1>");
 });
 
 app.get("/info", (request, response) => {
@@ -43,9 +44,18 @@ app.get("/info", (request, response) => {
 });
 
 app.get("/api/persons", (request, response) => {
-  response.json(persons);
+  Person.find({}).then((coso) => {
+    console.log(coso);
+    response.json(coso);
+  });
 });
 
+app.get("/api/persons/:id", (request, response) => {
+  Person.findById(request.params.id).then((p) => {
+    response.json(p);
+  });
+});
+/* 
 app.get("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   const person = persons.find((person) => person.id === id);
@@ -55,7 +65,7 @@ app.get("/api/persons/:id", (request, response) => {
     response.status(404).end();
   }
 });
-
+ */
 app.delete("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   persons = persons.filter((person) => person.id !== id);
@@ -63,14 +73,33 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+
+  if (body.name === undefined) {
+    return response.status(400).json({
+      error: "name missing",
+    });
+  }
+
+  const peson = new Person({
+    name: body.name,
+    number: body.number,
+  });
+
+  peson.save().then((savedNote) => {
+    response.json(savedNote);
+  });
+});
+
+/*
 const generateId = () => {
   min = Math.ceil(0);
   max = Math.floor(9999999);
   return Math.floor(Math.random() * (max - min + 1) + min);
-  /*     const maxId = persons.length > 0 ? Math.max(...persons.map((n) => n.id)) : 0;
-    return maxId + 1; */
+  //    const maxId = persons.length > 0 ? Math.max(...persons.map((n) => n.id)) : 0;
+    //return maxId + 1; 
 };
-
 app.post("/api/persons", (request, response) => {
   const body = request.body;
 
@@ -94,7 +123,6 @@ app.post("/api/persons", (request, response) => {
 
   response.json(person);
 });
-/*
  */
 
 const PORT = process.env.PORT || 3001;

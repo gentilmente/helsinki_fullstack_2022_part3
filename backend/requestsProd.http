@@ -1,0 +1,17 @@
+GET https://phonebookhelsinki.fly.dev/api/persons
+###
+GET https://phonebookhelsinki.fly.dev/api/persons/63473e61d82a1418a6261ca0
+###
+GET https://phonebookhelsinki.fly.dev/api/persons/1000
+###
+POST https://phonebookhelsinki.fly.dev/api/persons HTTP/1.1
+content-type: application/json
+
+{
+    "name":"cuco",
+    "number":1234
+}
+###
+DELETE https://phonebookhelsinki.fly.dev/api/persons/63473e61d82a1418a6261ca0
+###
+DELETE https://phonebookhelsinki.fly.dev/api/persons/13

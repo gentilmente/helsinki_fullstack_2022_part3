@@ -35,6 +35,7 @@ if (process.argv.length > 4) {
   mongoose.connect(url);
   console.log("phonebook:");
   Person.find({}).then((persons) => {
+    console.log(persons);
     persons.forEach((person) => console.log(person.name, person.number));
     mongoose.connection.close();
   });
