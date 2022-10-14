@@ -20,10 +20,10 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    if (persons.some((p) => p.name === newName && p.number === newNumber)) {
+    /* if (persons.some((p) => p.name === newName && p.number === newNumber)) {
       alert(`${newName} is already added to phonebook`);
       return;
-    }
+    } */
     let editingPers = persons.find(
       (p) => p.name === newName && p.number !== newNumber
     );
