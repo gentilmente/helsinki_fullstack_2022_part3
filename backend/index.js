@@ -57,12 +57,13 @@ app.delete("/api/persons/:id", (request, response, next) => {
 app.post("/api/persons", (request, response, next) => {
   const body = request.body;
 
-  const peson = new Person({
+  const person = new Person({
     name: body.name,
     number: body.number,
   });
 
-  peson
+  person
+    .exists()
     .save()
     .then((savedPerson) => {
       response.json(savedPerson);
@@ -71,14 +72,12 @@ app.post("/api/persons", (request, response, next) => {
 });
 
 app.put("/api/persons/:id", (request, response, next) => {
-  const body = request.body;
-
-  const person = {
-    name: body.content,
-    number: body.important,
-  };
-
-  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+  const { name, number } = request.body;
+  Person.findByIdAndUpdate(
+    request.params.id,
+    { name, number },
+    { new: true, runValidators: true, context: "query" }
+  )
     .then((updatedPerson) => {
       response.json(updatedPerson);
     })

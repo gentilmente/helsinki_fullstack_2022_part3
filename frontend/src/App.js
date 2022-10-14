@@ -34,12 +34,17 @@ const App = () => {
       const updatedPerson = { ...editingPers, number: newNumber };
       personServices
         .update(updatedPerson)
-        .then(() =>
+        .then(() => {
           setPersons(
             persons.map((p) => (p.id === editingPers.id ? updatedPerson : p))
-          )
+          );
+          setNotificationMessage(
+            `Succeed!, '${editingPers.name}' was modified`
+          );
+        })
+        .catch((error) =>
+          setNotificationMessage(`X, ${error.response.data.error}`)
         );
-      setNotificationMessage(`Succeed!, '${editingPers.name}' was modified`);
     } else {
       editingPers = { name: newName, number: newNumber };
       personServices
