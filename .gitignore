@@ -105,3 +105,4 @@ dist
 
 .DS_Store
 frontend/.DS_Store
+frontend/build
