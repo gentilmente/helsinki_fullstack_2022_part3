@@ -105,5 +105,5 @@ dist
 
 .DS_Store
 frontend/.DS_Store
-frontend/build
-backend/build
+frontend/build/*
+backend/build/*

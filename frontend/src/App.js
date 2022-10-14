@@ -42,10 +42,15 @@ const App = () => {
       setNotificationMessage(`Succeed!, '${editingPers.name}' was modified`);
     } else {
       editingPers = { name: newName, number: newNumber };
-      personServices.create(editingPers).then((created) => {
-        setPersons(persons.concat(created));
-        setNotificationMessage(`Succeed!, '${editingPers.name}' was added`);
-      });
+      personServices
+        .create(editingPers)
+        .then((created) => {
+          setPersons(persons.concat(created));
+          setNotificationMessage(`Succeed!, '${editingPers.name}' was added`);
+        })
+        .catch((error) =>
+          setNotificationMessage(`X, ${error.response.data.error}`)
+        );
     }
     setNewName("");
     setNewNumber("");
