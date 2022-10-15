@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const mongoose = require("mongoose");
 if (process.argv.length < 3) {
   console.log("Please: node mongo.js <password> <name> <number>");

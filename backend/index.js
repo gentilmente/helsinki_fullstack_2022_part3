@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.static("build"));
 const morgan = require("morgan");
 
-morgan.token("body", function (req, res) {
+morgan.token("body", function (req) {
   return JSON.stringify(req.body);
 });
 
@@ -20,7 +20,7 @@ app.get("/", (request, response) => {
   response.send("<h1>Hello Phonebook!</h1>");
 });
 
-app.get("/info", (request, response) => {
+app.get("/info", (request, response, next) => {
   Person.find({})
     .then((persons) => {
       response.send(`
@@ -31,7 +31,7 @@ app.get("/info", (request, response) => {
     .catch((error) => next(error));
 });
 
-app.get("/api/persons", (request, response) => {
+app.get("/api/persons", (request, response, next) => {
   Person.find({})
     .then((persons) => response.json(persons))
     .catch((error) => next(error));
@@ -48,7 +48,7 @@ app.get("/api/persons/:id", (request, response, next) => {
 
 app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
-    .then((result) => {
+    .then(() => {
       response.status(204).end();
     })
     .catch((error) => next(error));
@@ -98,6 +98,7 @@ const errorHandler = (error, request, response, next) => {
 };
 app.use(errorHandler);
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
